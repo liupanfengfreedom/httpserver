@@ -19,9 +19,15 @@ namespace httplisten
             handleThread.IsBackground = true;
             handleThread.Start();
         }
+        ~HttpListenerContextClass()
+        {
+            Console.WriteLine("HttpListenerContextClass deconstruct");
+        }
         void handlethreadfunc()
         {
             HttpListenerRequest request = mhttplistenercontext.Request;
+            System.Collections.Specialized.NameValueCollection header = request.Headers;
+            string[] headerallkeys = header.AllKeys;
             System.IO.Stream input = request.InputStream;
             byte[] array = new byte[request.ContentLength64];
             input.Read(array, 0, (int)request.ContentLength64);//larg file may encounter error

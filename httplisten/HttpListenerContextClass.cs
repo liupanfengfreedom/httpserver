@@ -28,6 +28,11 @@ namespace httplisten
             HttpListenerRequest request = mhttplistenercontext.Request;
             System.Collections.Specialized.NameValueCollection header = request.Headers;
             string[] headerallkeys = header.AllKeys;
+            foreach (var a in headerallkeys)
+            {
+                string[] values = header.GetValues(a);
+
+            }
             System.IO.Stream input = request.InputStream;
             byte[] array = new byte[request.ContentLength64];
             input.Read(array, 0, (int)request.ContentLength64);//larg file may encounter error
